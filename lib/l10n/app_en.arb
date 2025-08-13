@@ -1,0 +1,7 @@
+{
+    "@@locale": "en",
+    "app_name": "EtherStash",
+    "@app_name": {},
+    "empty_note_placeholder": "Tap to edit...",
+    "add": "Add"
+}

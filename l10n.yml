@@ -1,0 +1,6 @@
+# 指定我们存放“词典”的文件夹
+arb-dir: lib/l10n
+# 指定我们的“模板词典”是哪个文件 (通常用英文)
+template-arb-file: app_en.arb
+# 指定自动生成的Dart文件名
+output-localization-file: app_localizations.dart

@@ -1,0 +1,7 @@
+{
+    "@@locale": "zh",
+    "app_name":"以太笔记",
+    "@app_name": {},
+    "empty_note_placeholder": "点击添加内容...",
+    "add": "添加"
+}
