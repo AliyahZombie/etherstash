@@ -124,6 +124,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No notes'**
   String get no_notes;
+
+  /// No description provided for @no_matches.
+  ///
+  /// In en, this message translates to:
+  /// **'No matches'**
+  String get no_matches;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

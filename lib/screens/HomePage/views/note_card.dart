@@ -4,9 +4,11 @@ import 'package:etherstash/l10n/app_localizations.dart';
 import 'package:etherstash/providers/my_app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../utils/utils.dart';
 
 
 import '../../../models/note.dart';
+
 
 class NoteCard extends StatelessWidget {
   const NoteCard({super.key, required this.note});
@@ -15,17 +17,17 @@ class NoteCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        print("tapped ${note.id} ");
-      },
-      onLongPress: () {
-        print("long pressed ${note.id} ");
-        context.read<MyAppState>().deleteNote(note);
-      },
-      child: Card(
-        clipBehavior: Clip.antiAlias, // 防止内容溢出圆角
-        elevation: 4.0, // 给卡片一点阴影，让它"浮"起来
+    return Card(
+      clipBehavior: Clip.antiAlias, 
+      elevation: 4.0,
+      child: InkWell(
+        onTap: () {
+          print("tapped ${note.id} ");
+        },
+        onLongPress: () {
+          print("long pressed ${note.id} ");
+          context.read<MyAppState>().deleteNote(note);
+        },
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
@@ -36,10 +38,9 @@ class NoteCard extends StatelessWidget {
               const SizedBox(height: 8), // 加一点垂直间距
               // 创建日期
               Text(
-                // 这里简单格式化一下日期，未来可以用 intl 包做得更漂亮
                 '${note.createdAt.year}-${note.createdAt.month}-${note.createdAt.day}-${note.createdAt.hour}:${note.createdAt.minute}',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Colors.grey[700], // 用小一点、灰色一点的字体
+                      color: Colors.grey[700],
                     ),
               ),
             ],
@@ -110,12 +111,13 @@ class _EditableTextState extends State<EditableText> {
     else {
     return GestureDetector(
       onTap: _startEditing,
-      child: Text(
-        widget.note.content.isEmpty ? AppLocalizations.of(context)!.empty_note_placeholder : widget.note.content,
-        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-          color: widget.note.content.isEmpty ? Colors.grey : null,
-        ), // 用主题里定义好的大字体样式
+      child: buildHighlightedText(widget.note.content.isEmpty ? AppLocalizations.of(context)!.empty_note_placeholder : widget.note.content,
+       context.read<MyAppState>().searchParam, 
+       Theme.of(context).textTheme.bodyLarge?.copyWith(
+        color: widget.note.content.isEmpty ? Colors.grey : null,
+      )
       ),
+      
     );
   }
   }

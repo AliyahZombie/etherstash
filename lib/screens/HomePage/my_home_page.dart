@@ -1,5 +1,4 @@
 import 'package:etherstash/l10n/app_localizations.dart';
-import 'package:etherstash/l10n/app_localizations_zh.dart';
 import 'package:etherstash/screens/HomePage/views/serach_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

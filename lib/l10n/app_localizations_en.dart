@@ -22,4 +22,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get no_notes => 'No notes';
+
+  @override
+  String get no_matches => 'No matches';
 }

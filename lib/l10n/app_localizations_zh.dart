@@ -22,4 +22,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get no_notes => '无笔记';
+
+  @override
+  String get no_matches => '无匹配项';
 }

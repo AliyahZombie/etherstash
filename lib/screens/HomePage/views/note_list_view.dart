@@ -48,7 +48,7 @@ class NoteListView extends StatelessWidget {
     );
   }else{
     return Center(
-      child: Text(AppLocalizations.of(context)!.no_notes),
+      child: context.read<MyAppState>().searchParam.isEmpty ? Text(AppLocalizations.of(context)!.no_notes) :  Text(AppLocalizations.of(context)!.no_matches),
     );
   }
   
