@@ -112,6 +112,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Add'**
   String get add;
+
+  /// No description provided for @search_bar_hint_text.
+  ///
+  /// In en, this message translates to:
+  /// **'Search your notes...'**
+  String get search_bar_hint_text;
+
+  /// No description provided for @no_notes.
+  ///
+  /// In en, this message translates to:
+  /// **'No notes'**
+  String get no_notes;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

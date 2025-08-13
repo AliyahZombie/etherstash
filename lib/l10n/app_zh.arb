@@ -3,5 +3,7 @@
     "app_name":"以太笔记",
     "@app_name": {},
     "empty_note_placeholder": "点击添加内容...",
-    "add": "添加"
+    "add": "添加",
+    "search_bar_hint_text": "搜索你的笔记...",
+    "no_notes": "无笔记"
 }

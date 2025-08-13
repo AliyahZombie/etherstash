@@ -16,4 +16,10 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get add => '添加';
+
+  @override
+  String get search_bar_hint_text => '搜索你的笔记...';
+
+  @override
+  String get no_notes => '无笔记';
 }

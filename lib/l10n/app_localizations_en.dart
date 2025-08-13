@@ -16,4 +16,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get add => 'Add';
+
+  @override
+  String get search_bar_hint_text => 'Search your notes...';
+
+  @override
+  String get no_notes => 'No notes';
 }

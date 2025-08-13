@@ -3,5 +3,7 @@
     "app_name": "EtherStash",
     "@app_name": {},
     "empty_note_placeholder": "Tap to edit...",
-    "add": "Add"
+    "add": "Add",
+    "search_bar_hint_text": "Search your notes...",
+    "no_notes": "No notes"
 }

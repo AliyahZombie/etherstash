@@ -1,4 +1,5 @@
 // 别忘了在文件顶部导入我们的魔法师！
+import 'package:etherstash/l10n/app_localizations.dart';
 import 'package:etherstash/screens/HomePage/views/note_card.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
@@ -12,9 +13,11 @@ class NoteListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final notes = context.watch<MyAppState>().notes;
+    final notes = context.watch<MyAppState>().filteredNotes;
 
-    return LayoutBuilder(
+
+    if (notes.isNotEmpty){
+      return LayoutBuilder(
       builder: (context, constraints) {
         return AnimatedSwitcher(
           duration: const Duration(milliseconds: 375),
@@ -43,5 +46,11 @@ class NoteListView extends StatelessWidget {
         );
       }
     );
+  }else{
+    return Center(
+      child: Text(AppLocalizations.of(context)!.no_notes),
+    );
+  }
+  
   }
 }
