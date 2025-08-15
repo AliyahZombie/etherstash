@@ -256,6 +256,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Auth Key is required'**
   String get auth_key_required;
+
+  /// No description provided for @enable_worker_sync.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Worker Sync'**
+  String get enable_worker_sync;
+
+  /// No description provided for @refresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get refresh;
+
+  /// No description provided for @sync_success.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync successful'**
+  String get sync_success;
+
+  /// No description provided for @sync_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync failed'**
+  String get sync_failed;
+
+  /// No description provided for @syncing.
+  ///
+  /// In en, this message translates to:
+  /// **'Syncing...'**
+  String get syncing;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

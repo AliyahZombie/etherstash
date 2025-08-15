@@ -26,7 +26,19 @@ class NoteCard extends StatelessWidget {
         },
         onLongPress: () {
           print("long pressed ${note.id} ");
-          context.read<MyAppState>().deleteNote(note);
+          context.read<MyAppState>().deleteNote(note).then(
+            (value) {
+              if (context.mounted)
+              {ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(AppLocalizations.of(context)!.sync_success)),
+              );}
+            },
+            onError: (error) {
+              if (context.mounted){ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(AppLocalizations.of(context)!.sync_failed)),
+              );}
+            }
+          );
         },
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -101,7 +113,20 @@ class _EditableTextState extends State<EditableText> {
         onTapOutside: (event) {
           String currentValue = _controller.text;
           print('TextField value: $currentValue');
-          context.read<MyAppState>().saveNote(widget.note.copyWith(content: currentValue));
+            context.read<MyAppState>().saveNote(widget.note.copyWith(content: currentValue)).then(
+              (value) {
+                if (mounted)
+                {ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(AppLocalizations.of(context)!.sync_success)),
+                );}
+              },
+              onError: (error) {
+                if (mounted)
+                {ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(AppLocalizations.of(context)!.sync_failed)),
+                );}
+              }
+            );
           setState(() {
             _editing = false;
           });

@@ -15,6 +15,7 @@ class _SettingsPageState extends State<SettingsPage> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _baseUrlController = TextEditingController();
   final TextEditingController _authKeyController = TextEditingController();
+  bool _workerEnabled = false;
 
   bool _loading = false;
   bool _verifying = false;
@@ -32,6 +33,7 @@ class _SettingsPageState extends State<SettingsPage> {
     final prefs = await SharedPreferences.getInstance();
     _baseUrlController.text = prefs.getString(_kBaseUrlKey) ?? '';
     _authKeyController.text = prefs.getString(_kAuthKey) ?? '';
+    _workerEnabled = prefs.getBool('worker_enabled') ?? false;
     setState(() {});
   }
 
@@ -163,6 +165,31 @@ class _SettingsPageState extends State<SettingsPage> {
                         Text(
 t.worker_settings,
                           style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        Divider(),
+                        Row(
+                          children: [
+                            SizedBox(width: 50, child: Icon(Icons.cloud)),
+                            Text(AppLocalizations.of(context)!.enable_worker_sync),
+                            Switch(
+                              value: _workerEnabled,
+                              onChanged: (value) {
+                                SharedPreferences.getInstance().then((prefs) {
+                                  prefs.setBool('worker_enabled', value);
+                                  if(value){
+                                    _verify().then(
+                                      (event) {_workerEnabled = value;}
+                                    );
+                                  }
+                                  else{
+                                    _workerEnabled = value;
+                                  }
+                                  setState(() {});
+                                });
+                              },
+                            ),
+
+                          ],
                         ),
                         const SizedBox(height: 16),
                         TextFormField(

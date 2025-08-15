@@ -92,4 +92,19 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get auth_key_required => '请输入认证密钥';
+
+  @override
+  String get enable_worker_sync => '启用 Worker 同步';
+
+  @override
+  String get refresh => '刷新';
+
+  @override
+  String get sync_success => '同步成功';
+
+  @override
+  String get sync_failed => '同步失败';
+
+  @override
+  String get syncing => '正在同步...';
 }

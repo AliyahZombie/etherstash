@@ -17,6 +17,31 @@ class _MyHomePageState extends State<MyHomePage> {
   var _isSearching = false;
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(AppLocalizations.of(context)!.syncing)),
+        );
+    context.read<MyAppState>().sync().then(
+              (value){
+                if(value&&mounted){
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(AppLocalizations.of(context)!.sync_success)),
+                  );
+                }
+                else if(!value&&mounted){
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(AppLocalizations.of(context)!.sync_failed)),
+                  );
+                }
+              }
+            );
+    });
+
+  }
+
+  @override
   Widget build(BuildContext context) {
    return Scaffold(
     appBar: AppBar(
@@ -37,6 +62,29 @@ class _MyHomePageState extends State<MyHomePage> {
         })
         ),
       actions: [
+        IconButton(
+          icon: Icon(Icons.refresh),
+          tooltip: AppLocalizations.of(context)!.refresh,
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(AppLocalizations.of(context)!.syncing)),
+            );
+            context.read<MyAppState>().sync().then(
+              (value){
+                if(value&&context.mounted){
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(AppLocalizations.of(context)!.sync_success)),
+                  );
+                }
+                else if(!value&&context.mounted){
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(AppLocalizations.of(context)!.sync_failed)),
+                  );
+                }
+              }
+            );
+          },
+        ),
         IconButton(
           icon: Icon(Icons.add),
           tooltip: AppLocalizations.of(context)!.add,

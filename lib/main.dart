@@ -14,18 +14,22 @@ void main() async {
   Hive.registerAdapter(NoteAdapter());
   await Hive.openBox<Note>('notes');
 
+  
+
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
+
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
-        locale: const Locale('en'),
+        locale: const Locale('zh'),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         title: 'EtherStash',

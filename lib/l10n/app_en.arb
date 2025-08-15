@@ -39,5 +39,10 @@
   "base_url_required": "Base URL is required",
   "invalid_url": "Invalid URL",
   "@invalid_url": {},
-  "auth_key_required": "Auth Key is required"
+  "auth_key_required": "Auth Key is required",
+  "enable_worker_sync": "Enable Worker Sync",
+  "refresh": "Refresh",
+  "sync_success": "Sync successful",
+  "sync_failed": "Sync failed",
+  "syncing": "Syncing..."
 }

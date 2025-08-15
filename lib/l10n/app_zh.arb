@@ -38,5 +38,10 @@
   "tips_content_type": "• 内容类型：带请求体时使用 application/json",
   "base_url_required": "请输入基础地址",
   "invalid_url": "URL 不合法",
-  "auth_key_required": "请输入认证密钥"
+  "auth_key_required": "请输入认证密钥",
+  "enable_worker_sync": "启用 Worker 同步",
+  "refresh": "刷新",
+  "sync_success": "同步成功",
+  "sync_failed": "同步失败",
+  "syncing": "正在同步..."
 }

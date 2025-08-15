@@ -175,15 +175,25 @@ async function handleDeleteNote(env, params) {
   if (!noteId) return json({ error: 'Missing id' }, { status: 400 });
   try {
     const now = Date.now();
-    const res = await env.DB.prepare(
+    await env.DB.prepare(
       'UPDATE notes SET content = ?, createdAt = ? WHERE id = ?'
     ).bind('', now, noteId).run();
-    if (!res || (res.changes || 0) === 0) {
-      return json({ error: 'Note not found' }, { status: 404 });
-    }
-    const row = await env.DB.prepare('SELECT id, content, createdAt FROM notes WHERE id = ?')
+
+    // 无论 UPDATE 是否有变更，先尝试读取；
+    // 若读取不到再 INSERT，避免“本来存在但值未变化”的误判导致的唯一键冲突。
+    let row = await env.DB.prepare('SELECT id, content, createdAt FROM notes WHERE id = ?')
       .bind(noteId)
       .first();
+
+    if (!row) {
+      await env.DB.prepare(
+        'INSERT INTO notes (id, content, createdAt) VALUES (?, ?, ?)'
+      ).bind(noteId, '', now).run();
+      row = await env.DB.prepare('SELECT id, content, createdAt FROM notes WHERE id = ?')
+        .bind(noteId)
+        .first();
+    }
+
     return json({
       id: row.id,
       content: row.content,

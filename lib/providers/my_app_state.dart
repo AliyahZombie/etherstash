@@ -19,7 +19,28 @@ class MyAppState extends ChangeNotifier {
 
     void loadNotes() async {
       _notes = await _noteRepo.getNotes();
+      _noteRepo.syncFromCloud().then(
+            (value) {
+          _notes = value;
+          notifyListeners();
+        },
+        onError: (error) {
+          print('Error syncing notes: $error');
+        },
+      );
       notifyListeners();
+    }
+
+    Future<bool> sync() async {
+      try {
+        _notes = await _noteRepo.syncFromCloud();
+        await _noteRepo.syncToCloud();
+        notifyListeners();
+        return true;
+      } catch (e) {
+        print('Error syncing notes: $e');
+        return false;
+      }
     }
 
     void updateSearchParam(String newParam) {
@@ -42,13 +63,13 @@ class MyAppState extends ChangeNotifier {
     }
 }
 
-    void saveNote(Note note) async{
+    Future<void> saveNote(Note note) async{
       await _noteRepo.saveNote(note);
       _notes = await _noteRepo.getNotes();
       notifyListeners();
     } 
 
-    void deleteNote(Note note) async{
+    Future<void> deleteNote(Note note) async{
         _noteRepo.deleteNote(note);
         _notes = await _noteRepo.getNotes();
         notifyListeners();

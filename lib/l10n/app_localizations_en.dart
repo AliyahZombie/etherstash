@@ -92,4 +92,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get auth_key_required => 'Auth Key is required';
+
+  @override
+  String get enable_worker_sync => 'Enable Worker Sync';
+
+  @override
+  String get refresh => 'Refresh';
+
+  @override
+  String get sync_success => 'Sync successful';
+
+  @override
+  String get sync_failed => 'Sync failed';
+
+  @override
+  String get syncing => 'Syncing...';
 }
