@@ -112,7 +112,7 @@ jobs:
           path: windows-debug.zip
 
   android_release:
-    name: Android Release (signed AAB/APK)
+    name: Android Release (debug-signed AAB/APK)
     if: startsWith(github.event.head_commit.message, 'release')
     runs-on: ubuntu-latest
     needs: get_version
@@ -128,43 +128,10 @@ jobs:
       - name: Flutter pub get
         run: flutter pub get
 
-      - name: Prepare Android keystore
-        env:
-          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
-        run: |
-          mkdir -p android/keystore
-          echo "$ANDROID_KEYSTORE_BASE64" | base64 -d > android/keystore/etherstash_android_release.jks
-
-      - name: Validate keystore
-        env:
-          STORE_PWD: ${{ secrets.ANDROID_STORE_PASSWORD }}
-        run: |
-          set -e
-          if ! keytool -list -keystore android/keystore/etherstash_android_release.jks -storepass "$STORE_PWD" >/dev/null 2>&1; then
-            echo "Keystore password appears incorrect. Please verify ANDROID_STORE_PASSWORD matches the JKS store password." >&2
-            exit 1
-          fi
-
-      - name: Write key.properties
-        env:
-          STORE_PWD: ${{ secrets.ANDROID_STORE_PASSWORD }}
-          KEY_PWD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
-        run: |
-          set -e
-          # Fallback: if KEY_PWD is empty, use STORE_PWD (PKCS12 often enforces same pwd)
-          EFFECTIVE_KEY_PWD=${KEY_PWD:-$STORE_PWD}
-          cat > android/key.properties <<EOF
-          storePassword=${STORE_PWD}
-          keyPassword=${EFFECTIVE_KEY_PWD}
-          keyAlias=${KEY_ALIAS}
-          storeFile=../keystore/etherstash_android_release.jks
-          EOF
-
-      - name: Build Android App Bundle (release)
+      - name: Build Android App Bundle (release with debug signing)
         run: flutter build appbundle --release --build-name ${{ needs.get_version.outputs.VERSION_NAME }}
 
-      - name: Build Android APK (release)
+      - name: Build Android APK (release with debug signing)
         run: flutter build apk --release --build-name ${{ needs.get_version.outputs.VERSION_NAME }}
 
       - name: Upload Android release artifacts
