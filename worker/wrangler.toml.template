@@ -1,0 +1,20 @@
+# Wrangler config for the Worker
+# Edit the "name" and account_id as needed. Bind D1 and set compatibility dates.
+
+name = "etherstash-worker"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+
+# D1 database binding
+[[d1_databases]]
+binding = "DB"
+database_name = "etherstash-db"
+database_id = "REPLACE_WITH_D1_DB_ID"
+
+# Optional: enable node_compat if using some Node APIs (not needed here)
+# node_compat = true
+
+[vars]
+# Do NOT put secrets here. Set AUTH_SECRET_KEY as a secret with wrangler.
+# AUTH_SECRET_KEY will be stored via `wrangler secret put AUTH_SECRET_KEY` and not checked into code.
+

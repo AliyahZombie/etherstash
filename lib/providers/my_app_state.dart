@@ -12,8 +12,14 @@ class MyAppState extends ChangeNotifier {
     UnmodifiableListView<Note> get notes => UnmodifiableListView(_notes);
     String get searchParam => _searchParam;
 
-    MyAppState(){
-        _notes = _noteRepo.getNotes();
+    MyAppState() {
+      loadNotes();
+      
+    }
+
+    void loadNotes() async {
+      _notes = await _noteRepo.getNotes();
+      notifyListeners();
     }
 
     void updateSearchParam(String newParam) {
@@ -36,25 +42,15 @@ class MyAppState extends ChangeNotifier {
     }
 }
 
-    void saveNote(Note note){
-        // 检查笔记是否已存在
-        bool noteExists = _notes.any((element) => element.id == note.id);
-        
-        if (noteExists) {
-            // 更新现有笔记
-            _noteRepo.saveNote(note);
-            _notes = _noteRepo.getNotes();
-        } else {
-            // 添加新笔记
-            _noteRepo.saveNote(note);
-            _notes = _noteRepo.getNotes();
-        }
-        notifyListeners();
+    void saveNote(Note note) async{
+      await _noteRepo.saveNote(note);
+      _notes = await _noteRepo.getNotes();
+      notifyListeners();
     } 
 
-    void deleteNote(Note note){
-        _notes.remove(note);
+    void deleteNote(Note note) async{
         _noteRepo.deleteNote(note);
+        _notes = await _noteRepo.getNotes();
         notifyListeners();
     }
 }

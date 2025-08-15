@@ -1,3 +1,6 @@
+import 'package:etherstash/models/note.dart';
+import 'package:hive_flutter/adapters.dart';
+
 import 'providers/my_app_state.dart';
 import 'package:etherstash/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +8,12 @@ import 'package:provider/provider.dart';
 import 'screens/HomePage/my_home_page.dart';
 
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(NoteAdapter());
+  await Hive.openBox<Note>('notes');
+
   runApp(MyApp());
 }
 

@@ -4,7 +4,6 @@ import 'package:etherstash/screens/HomePage/views/note_card.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 import 'package:etherstash/providers/my_app_state.dart';
-import 'package:etherstash/models/note.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 

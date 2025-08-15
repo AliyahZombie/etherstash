@@ -1,33 +1,32 @@
+import 'package:hive_flutter/hive_flutter.dart';
 import '../models/note.dart';
 
+/// Local-only Note repository. Networking has been disabled for redesign.
 class Noterepo {
-    List<Note> notes = [];
-    Noterepo(){
-        notes.add(Note(id: '1', content: 'Hello World', createdAt: DateTime.now()));
-        notes.add(Note(id: '2', content: 'Hello World 2', createdAt: DateTime.now().add(Duration(days: 1))));
-        notes.add(Note(id: '3', content: 'Hello World 3', createdAt: DateTime.now().add(Duration(days: 2))));
-        notes.add(Note(id: '4', content: 'Hello World 4', createdAt: DateTime.now().add(Duration(days: 3))));
-    }
-    List<Note> getNotes(){
-        return notes;
-    }
-    
-    void saveNote(Note note){
-        bool noteExists = false;
-        for (int i = 0; i < notes.length; i++){
-          if (notes[i].id == note.id){
-            notes[i] = note;
-            noteExists = true;
-            break;
-          }
-        }
-        if (!noteExists) {
-          notes.add(note);
-        }
-    } 
+  final Box<Note> _noteBox = Hive.box<Note>('notes');
 
-    void deleteNote(Note note){
-        notes.remove(note);
-    }
-    
+  Noterepo();
+
+
+  Future<List<Note>> fetchRemoteNotes() async {
+    return getNotes();
+  }
+
+
+  Future<List<Note>> getNotes() async {
+    final notes = _noteBox.values.toList();
+    notes.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+    return notes;
+  }
+
+
+  Future<void> saveNote(Note note) async {
+    await _noteBox.put(note.id, note);
+  }
+
+
+  Future<void> deleteNote(Note note) async {
+    await _noteBox.delete(note.id);
+  }
+
 }

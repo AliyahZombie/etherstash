@@ -130,6 +130,132 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No matches'**
   String get no_matches;
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// No description provided for @worker_settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Worker Settings'**
+  String get worker_settings;
+
+  /// No description provided for @base_url.
+  ///
+  /// In en, this message translates to:
+  /// **'Base URL'**
+  String get base_url;
+
+  /// No description provided for @base_url_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'https://your-worker.example.workers.dev'**
+  String get base_url_hint;
+
+  /// No description provided for @auth_key.
+  ///
+  /// In en, this message translates to:
+  /// **'Auth Key'**
+  String get auth_key;
+
+  /// No description provided for @auth_key_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Your secret key'**
+  String get auth_key_hint;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @verify_connection.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify connection'**
+  String get verify_connection;
+
+  /// No description provided for @saved_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved successfully'**
+  String get saved_successfully;
+
+  /// No description provided for @save_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Save failed'**
+  String get save_failed;
+
+  /// No description provided for @connection_verified.
+  ///
+  /// In en, this message translates to:
+  /// **'Connection verified'**
+  String get connection_verified;
+
+  /// No description provided for @unauthorized_invalid_key.
+  ///
+  /// In en, this message translates to:
+  /// **'Unauthorized: invalid key'**
+  String get unauthorized_invalid_key;
+
+  /// No description provided for @verify_error.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify error'**
+  String get verify_error;
+
+  /// No description provided for @failed_http.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed: HTTP {code}'**
+  String failed_http(Object code);
+
+  /// No description provided for @tips.
+  ///
+  /// In en, this message translates to:
+  /// **'Tips'**
+  String get tips;
+
+  /// No description provided for @tips_base_url.
+  ///
+  /// In en, this message translates to:
+  /// **'• Base URL: your Worker domain, e.g. https://your-worker.example.workers.dev'**
+  String get tips_base_url;
+
+  /// No description provided for @tips_auth.
+  ///
+  /// In en, this message translates to:
+  /// **'• Authorization: send Authorization: Bearer {AUTH_SECRET_KEY}'**
+  String tips_auth(Object AUTH_SECRET_KEY);
+
+  /// No description provided for @tips_content_type.
+  ///
+  /// In en, this message translates to:
+  /// **'• Content-Type: application/json for requests with body'**
+  String get tips_content_type;
+
+  /// No description provided for @base_url_required.
+  ///
+  /// In en, this message translates to:
+  /// **'Base URL is required'**
+  String get base_url_required;
+
+  /// No description provided for @invalid_url.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid URL'**
+  String get invalid_url;
+
+  /// No description provided for @auth_key_required.
+  ///
+  /// In en, this message translates to:
+  /// **'Auth Key is required'**
+  String get auth_key_required;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

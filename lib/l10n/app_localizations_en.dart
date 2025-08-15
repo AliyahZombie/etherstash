@@ -25,4 +25,71 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get no_matches => 'No matches';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get worker_settings => 'Worker Settings';
+
+  @override
+  String get base_url => 'Base URL';
+
+  @override
+  String get base_url_hint => 'https://your-worker.example.workers.dev';
+
+  @override
+  String get auth_key => 'Auth Key';
+
+  @override
+  String get auth_key_hint => 'Your secret key';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get verify_connection => 'Verify connection';
+
+  @override
+  String get saved_successfully => 'Saved successfully';
+
+  @override
+  String get save_failed => 'Save failed';
+
+  @override
+  String get connection_verified => 'Connection verified';
+
+  @override
+  String get unauthorized_invalid_key => 'Unauthorized: invalid key';
+
+  @override
+  String get verify_error => 'Verify error';
+
+  @override
+  String failed_http(Object code) {
+    return 'Failed: HTTP $code';
+  }
+
+  @override
+  String get tips => 'Tips';
+
+  @override
+  String get tips_base_url => '• Base URL: your Worker domain, e.g. https://your-worker.example.workers.dev';
+
+  @override
+  String tips_auth(Object AUTH_SECRET_KEY) {
+    return '• Authorization: send Authorization: Bearer $AUTH_SECRET_KEY';
+  }
+
+  @override
+  String get tips_content_type => '• Content-Type: application/json for requests with body';
+
+  @override
+  String get base_url_required => 'Base URL is required';
+
+  @override
+  String get invalid_url => 'Invalid URL';
+
+  @override
+  String get auth_key_required => 'Auth Key is required';
 }

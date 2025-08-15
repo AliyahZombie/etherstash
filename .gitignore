@@ -43,3 +43,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+worker/wrangler.toml
+worker/.wrangler
+worker/node_modules
+

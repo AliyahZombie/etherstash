@@ -1,10 +1,43 @@
 {
-    "@@locale": "en",
-    "app_name": "EtherStash",
-    "@app_name": {},
-    "empty_note_placeholder": "Tap to edit...",
-    "add": "Add",
-    "search_bar_hint_text": "Search your notes...",
-    "no_notes": "No notes",
-    "no_matches": "No matches"
+  "@@locale": "en",
+  "app_name": "EtherStash",
+  "@app_name": {},
+  "empty_note_placeholder": "Tap to edit...",
+  "add": "Add",
+  "search_bar_hint_text": "Search your notes...",
+  "no_notes": "No notes",
+  "no_matches": "No matches",
+  "settings": "Settings",
+
+  "worker_settings": "Worker Settings",
+  "base_url": "Base URL",
+  "base_url_hint": "https://your-worker.example.workers.dev",
+  "auth_key": "Auth Key",
+  "auth_key_hint": "Your secret key",
+  "save": "Save",
+  "verify_connection": "Verify connection",
+  "saved_successfully": "Saved successfully",
+  "save_failed": "Save failed",
+  "connection_verified": "Connection verified",
+  "unauthorized_invalid_key": "Unauthorized: invalid key",
+  "verify_error": "Verify error",
+  "failed_http": "Failed: HTTP {code}",
+  "@failed_http": {
+    "placeholders": {
+      "code": {}
+    }
+  },
+  "tips": "Tips",
+  "tips_base_url": "• Base URL: your Worker domain, e.g. https://your-worker.example.workers.dev",
+  "tips_auth": "• Authorization: send Authorization: Bearer {AUTH_SECRET_KEY}",
+  "@tips_auth": {
+    "placeholders": {
+      "AUTH_SECRET_KEY": {}
+    }
+  },
+  "tips_content_type": "• Content-Type: application/json for requests with body",
+  "base_url_required": "Base URL is required",
+  "invalid_url": "Invalid URL",
+  "@invalid_url": {},
+  "auth_key_required": "Auth Key is required"
 }

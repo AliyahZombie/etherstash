@@ -1,5 +1,6 @@
 import 'package:etherstash/l10n/app_localizations.dart';
 import 'package:etherstash/screens/HomePage/views/serach_bar.dart';
+import 'package:etherstash/screens/SettingsPage/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../models/note.dart';
@@ -43,9 +44,17 @@ class _MyHomePageState extends State<MyHomePage> {
             context.read<MyAppState>().saveNote(Note(id: DateTime.now().millisecondsSinceEpoch.toString(), content: '',createdAt: DateTime.now()));
           },
         ),
+        IconButton(
+          icon: Icon(Icons.settings),
+          tooltip: 'Settings',
+          onPressed: () {
+            Navigator.push(
+              context, MaterialPageRoute(builder:   (context) => SettingsPage()));
+          },
+        ),
       ],
     ),
-    body: NoteListView(),
+    body: NoteListView()
     );
   }
 }

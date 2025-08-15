@@ -1,10 +1,42 @@
 {
-    "@@locale": "zh",
-    "app_name":"以太笔记",
-    "@app_name": {},
-    "empty_note_placeholder": "点击添加内容...",
-    "add": "添加",
-    "search_bar_hint_text": "搜索你的笔记...",
-    "no_notes": "无笔记",
-    "no_matches": "无匹配项"
+  "@@locale": "zh",
+  "app_name": "以太笔记",
+  "@app_name": {},
+  "empty_note_placeholder": "点击添加内容...",
+  "add": "添加",
+  "search_bar_hint_text": "搜索你的笔记...",
+  "no_notes": "无笔记",
+  "no_matches": "无匹配项",
+  "settings": "设置",
+
+  "worker_settings": "Worker 设置",
+  "base_url": "基础地址",
+  "base_url_hint": "https://your-worker.example.workers.dev",
+  "auth_key": "认证密钥",
+  "auth_key_hint": "你的密钥",
+  "save": "保存",
+  "verify_connection": "验证连接",
+  "saved_successfully": "保存成功",
+  "save_failed": "保存失败",
+  "connection_verified": "连接成功",
+  "unauthorized_invalid_key": "未授权：无效密钥",
+  "verify_error": "验证出错",
+  "failed_http": "失败：HTTP {code}",
+  "@failed_http": {
+    "placeholders": {
+      "code": {}
+    }
+  },
+  "tips": "提示",
+  "tips_base_url": "• 基础地址：你的 Worker 域名，例如 https://your-worker.example.workers.dev",
+  "tips_auth": "• 认证：使用 Authorization: Bearer {AUTH_SECRET_KEY}",
+  "@tips_auth": {
+    "placeholders": {
+      "AUTH_SECRET_KEY": {}
+    }
+  },
+  "tips_content_type": "• 内容类型：带请求体时使用 application/json",
+  "base_url_required": "请输入基础地址",
+  "invalid_url": "URL 不合法",
+  "auth_key_required": "请输入认证密钥"
 }

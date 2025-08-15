@@ -25,4 +25,71 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get no_matches => '无匹配项';
+
+  @override
+  String get settings => '设置';
+
+  @override
+  String get worker_settings => 'Worker 设置';
+
+  @override
+  String get base_url => '基础地址';
+
+  @override
+  String get base_url_hint => 'https://your-worker.example.workers.dev';
+
+  @override
+  String get auth_key => '认证密钥';
+
+  @override
+  String get auth_key_hint => '你的密钥';
+
+  @override
+  String get save => '保存';
+
+  @override
+  String get verify_connection => '验证连接';
+
+  @override
+  String get saved_successfully => '保存成功';
+
+  @override
+  String get save_failed => '保存失败';
+
+  @override
+  String get connection_verified => '连接成功';
+
+  @override
+  String get unauthorized_invalid_key => '未授权：无效密钥';
+
+  @override
+  String get verify_error => '验证出错';
+
+  @override
+  String failed_http(Object code) {
+    return '失败：HTTP $code';
+  }
+
+  @override
+  String get tips => '提示';
+
+  @override
+  String get tips_base_url => '• 基础地址：你的 Worker 域名，例如 https://your-worker.example.workers.dev';
+
+  @override
+  String tips_auth(Object AUTH_SECRET_KEY) {
+    return '• 认证：使用 Authorization: Bearer $AUTH_SECRET_KEY';
+  }
+
+  @override
+  String get tips_content_type => '• 内容类型：带请求体时使用 application/json';
+
+  @override
+  String get base_url_required => '请输入基础地址';
+
+  @override
+  String get invalid_url => 'URL 不合法';
+
+  @override
+  String get auth_key_required => '请输入认证密钥';
 }
