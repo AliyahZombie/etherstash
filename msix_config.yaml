@@ -1,0 +1,23 @@
+# MSIX packaging configuration for etherstash
+# Adjust values to match your certificate and publisher info
+
+# 4-part version required by MSIX
+msix_version: 0.1.0.0
+
+# Display metadata
+display_name: EtherStash
+publisher_display_name: EtherStash
+identity_name: com.etherstash.app
+publisher: CN=EtherStash
+
+# Visual assets
+logo_path: windows/runner/resources/app_icon.ico
+
+# Capabilities
+capabilities:
+  - internetClient
+
+# Signing
+certificate_path: ./certs/codesign.pfx
+certificate_password: ${MSIX_PFX_PASSWORD}
+
