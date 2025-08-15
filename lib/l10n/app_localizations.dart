@@ -286,6 +286,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Syncing...'**
   String get syncing;
+
+  /// No description provided for @platform_settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Platform Settings'**
+  String get platform_settings;
+
+  /// No description provided for @platform_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'EtherStash on {platform}'**
+  String platform_hint(Object platform);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

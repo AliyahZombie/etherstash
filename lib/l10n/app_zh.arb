@@ -43,5 +43,12 @@
   "refresh": "刷新",
   "sync_success": "同步成功",
   "sync_failed": "同步失败",
-  "syncing": "正在同步..."
+  "syncing": "正在同步...",
+  "platform_settings": "平台设置",
+  "platform_hint": "EtherStash - {platform}",
+  "@platform_hint": {
+    "placeholders": {
+      "platform": {}
+    }
+  }
 }

@@ -135,12 +135,29 @@ jobs:
           mkdir -p android/keystore
           echo "$ANDROID_KEYSTORE_BASE64" | base64 -d > android/keystore/etherstash_android_release.jks
 
-      - name: Write key.properties
+      - name: Validate keystore
+        env:
+          STORE_PWD: ${{ secrets.ANDROID_STORE_PASSWORD }}
         run: |
+          set -e
+          if ! keytool -list -keystore android/keystore/etherstash_android_release.jks -storepass "$STORE_PWD" >/dev/null 2>&1; then
+            echo "Keystore password appears incorrect. Please verify ANDROID_STORE_PASSWORD matches the JKS store password." >&2
+            exit 1
+          fi
+
+      - name: Write key.properties
+        env:
+          STORE_PWD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+          KEY_PWD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+        run: |
+          set -e
+          # Fallback: if KEY_PWD is empty, use STORE_PWD (PKCS12 often enforces same pwd)
+          EFFECTIVE_KEY_PWD=${KEY_PWD:-$STORE_PWD}
           cat > android/key.properties <<EOF
-          storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}
-          keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}
-          keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}
+          storePassword=${STORE_PWD}
+          keyPassword=${EFFECTIVE_KEY_PWD}
+          keyAlias=${KEY_ALIAS}
           storeFile=../keystore/etherstash_android_release.jks
           EOF
 

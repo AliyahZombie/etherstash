@@ -44,5 +44,12 @@
   "refresh": "Refresh",
   "sync_success": "Sync successful",
   "sync_failed": "Sync failed",
-  "syncing": "Syncing..."
+  "syncing": "Syncing...",
+   "platform_settings": "Platform Settings",
+   "platform_hint": "EtherStash on {platform}",
+  "@platform_hint": {
+    "placeholders": {
+      "platform": {}
+    }
+  }
 }

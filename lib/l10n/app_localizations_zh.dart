@@ -107,4 +107,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get syncing => '正在同步...';
+
+  @override
+  String get platform_settings => '平台设置';
+
+  @override
+  String platform_hint(Object platform) {
+    return 'EtherStash - $platform';
+  }
 }

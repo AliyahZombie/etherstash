@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:etherstash/l10n/app_localizations.dart';
 import 'package:etherstash/screens/HomePage/views/serach_bar.dart';
 import 'package:etherstash/screens/SettingsPage/settings_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tray_manager/tray_manager.dart';
+import 'package:window_manager/window_manager.dart';
 import '../../models/note.dart';
 import '../../providers/my_app_state.dart';
 import 'views/note_list_view.dart';
@@ -12,13 +17,58 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with TrayListener {
   var selectedIndex = 0;
   var _isSearching = false;
 
   @override
+  void onTrayMenuItemClick(MenuItem menuItem) {
+    if (menuItem.key == 'exit_app') {
+        windowManager.close();
+    }
+  }
+
+  Future<void> _initTrayIcon() async {
+    await trayManager.setIcon(
+      'images/tray_icon.png', 
+    );
+    await trayManager.setToolTip('EtherStash');
+    Menu menu = Menu(
+      items: [
+        MenuItem(
+          key: 'exit_app',
+          label: 'Exit App',
+        ),
+      ],
+    );
+    await trayManager.setContextMenu(menu);
+  }
+
+  @override
+  void dispose() {
+    trayManager.removeListener(this);
+    super.dispose();
+  }
+
+  @override
+  void onTrayIconMouseDown ()async {
+      bool isVisible = await windowManager.isVisible();
+      isVisible ? await windowManager.hide() : await windowManager.show();
+    }
+
+  @override
+  void onTrayIconRightMouseDown () async {
+      trayManager.popUpContextMenu();
+    }
+
+  @override
   void initState() {
     super.initState();
+    if (Platform.isWindows) {
+      trayManager.addListener(this);
+      _initTrayIcon();
+    }
+    
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(AppLocalizations.of(context)!.syncing)),

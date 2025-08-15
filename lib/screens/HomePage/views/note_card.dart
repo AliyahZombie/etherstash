@@ -104,6 +104,7 @@ class _EditableTextState extends State<EditableText> {
       return TextField(
         controller: _controller,
         autofocus: true,
+        maxLines: null,
         onSubmitted: (value) {
           setState(() {
             _editing = false;

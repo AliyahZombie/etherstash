@@ -107,4 +107,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get syncing => 'Syncing...';
+
+  @override
+  String get platform_settings => 'Platform Settings';
+
+  @override
+  String platform_hint(Object platform) {
+    return 'EtherStash on $platform';
+  }
 }

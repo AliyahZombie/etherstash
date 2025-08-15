@@ -1,6 +1,12 @@
-// 你可以把这个函数放在一个公共的 utils 文件里，或者直接放在 NoteCard 所在文件的顶部
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'dart:io' show Platform;
 
 import 'package:flutter/material.dart';
+
+String currentOS() {
+  if (kIsWeb) return 'web';
+  return Platform.operatingSystem; // 'android', 'ios', 'windows', 'macos', 'linux', 'fuchsia'
+}
 
 RichText buildHighlightedText(String text, String highlight, TextStyle? defaultStyle) {
   // 如果高亮词为空，直接返回普通文本，避免出错

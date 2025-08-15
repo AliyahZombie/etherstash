@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:etherstash/models/note.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:window_manager/window_manager.dart';
 
 import 'providers/my_app_state.dart';
 import 'package:etherstash/l10n/app_localizations.dart';
@@ -13,7 +16,9 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(NoteAdapter());
   await Hive.openBox<Note>('notes');
-
+  if(Platform.isWindows){
+      await windowManager.ensureInitialized();
+  }
   
 
   runApp(MyApp());
