@@ -38,21 +38,10 @@ android {
         versionName = flutter.versionName
     }
 
-    signingConfigs {
-        create("release") {
-            if (keystoreProperties.containsKey("storeFile")) {
-                storeFile = file(keystoreProperties["storeFile"] as String)
-                storePassword = keystoreProperties["storePassword"] as String?
-                keyAlias = keystoreProperties["keyAlias"] as String?
-                keyPassword = keystoreProperties["keyPassword"] as String?
-            }
-        }
-    }
-
     buildTypes {
         release {
-            // Use release signing if provided, otherwise fall back to debug signing
-            signingConfig = signingConfigs.findByName("release") ?: signingConfigs.getByName("debug")
+            // Use debug signing for now
+            signingConfig = signingConfigs.getByName("debug")
             isMinifyEnabled = false
             isShrinkResources = false
         }
