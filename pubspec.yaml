@@ -1,9 +1,9 @@
 name: etherstash
-description: A new Flutter project.
+description: An efficient and concise note-taking tool with self-hosted cloud sync support
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 0.1.0+2
+version: 0.1.0+3
 
 environment:
   sdk: '>=2.19.4 <4.0.0'
