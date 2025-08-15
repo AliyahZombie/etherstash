@@ -192,55 +192,13 @@ jobs:
           path: windows-release.zip
 
   release:
-    name: Create GitHub Release (and build MSIX)
+    name: Create GitHub Release
     if: startsWith(github.event.head_commit.message, 'release')
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs: [get_version, android_release, windows_release]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Set up Flutter (${{ env.FLUTTER_CHANNEL }})
-        uses: subosito/flutter-action@v2
-        with:
-          channel: ${{ env.FLUTTER_CHANNEL }}
-
-      - name: Enable Windows desktop
-        run: flutter config --enable-windows-desktop
-
-      - name: Flutter pub get
-        run: flutter pub get
-
-      - name: Prepare signing certificate
-        shell: pwsh
-        run: |
-          New-Item -ItemType Directory -Force -Path certs | Out-Null
-          if (-not [string]::IsNullOrWhiteSpace("${{ secrets.MSIX_PFX_BASE64 }}")) {
-            [IO.File]::WriteAllBytes("certs/codesign.pfx", [Convert]::FromBase64String("${{ secrets.MSIX_PFX_BASE64 }}"))
-          } else {
-            Write-Error "MSIX_PFX_BASE64 secret is missing. Please add it to repository secrets."
-          }
-        env:
-          MSIX_PFX_PASSWORD: ${{ secrets.MSIX_PFX_PASSWORD }}
-
-      - name: Build Windows MSIX (signed)
-        shell: pwsh
-        env:
-          MSIX_PFX_PASSWORD: ${{ secrets.MSIX_PFX_PASSWORD }}
-        run: |
-          # Ensure dependencies are ready
-          dart pub get
-          # Create signed MSIX using msix_config.yaml and injected certificate
-          dart run msix:create
-
-      - name: Find MSIX artifact
-        id: findmsix
-        shell: pwsh
-        run: |
-          $msix = Get-ChildItem -Path . -Recurse -Filter *.msix | Select-Object -First 1
-          if ($null -ne $msix) {
-            "path=$($msix.FullName)" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
-          }
 
       - name: Download Windows release artifact
         uses: actions/download-artifact@v4
@@ -253,13 +211,6 @@ jobs:
         with:
           name: android-release
           path: ./release-assets
-
-      - name: Move MSIX into assets (if exists)
-        if: steps.findmsix.outputs.path != ''
-        shell: pwsh
-        run: |
-          New-Item -ItemType Directory -Force -Path ./release-assets | Out-Null
-          Copy-Item -Path "${{ steps.findmsix.outputs.path }}" -Destination ./release-assets/
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
